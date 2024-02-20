@@ -1,6 +1,6 @@
 "use client";
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <footer className="flex h-24 w-full bg-black text-base shadow items-center text-white p-8">
       <div>
@@ -30,3 +30,4 @@ export const Footer = () => {
     </footer>
   );
 };
+export default Footer;
