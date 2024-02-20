@@ -3,8 +3,8 @@ import React from "react";
 interface CommonHeaderProps {
   title: string;
   subtitle?: string;
-  titleSize?: string; // 타이틀 텍스트 크기 프롭스 추가 (선택적)
-  subtitleSize?: string; // 서브타이틀 텍스트 크기 프롭스 추가 (선택적)
+  titleSize?: string;
+  subtitleSize?: string;
 }
 
 const JwtCommonHeader = ({

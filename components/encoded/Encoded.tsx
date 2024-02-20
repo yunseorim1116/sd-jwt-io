@@ -1,4 +1,4 @@
-import JwtCommonHeader from "./common/JwtCommonHeader";
+import JwtCommonHeader from "../common/JwtCommonHeader";
 import { updateURLWithQuery } from "@/utils/stringToUint8Array";
 import { ChangeEvent } from "react";
 

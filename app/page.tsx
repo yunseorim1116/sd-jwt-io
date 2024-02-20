@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent } from "react";
 import { useState } from "react";
-import Encoded from "@/components/Encoded";
+import Encoded from "@/components/encoded/Encoded";
 import SelectAlg from "@/components/SelectAlg";
 import JwtHeader from "@/components/decoded/JwtHeader";
 import VerifySignature from "@/components/decoded/VerifySignature";
