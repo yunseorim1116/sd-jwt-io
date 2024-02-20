@@ -25,7 +25,7 @@ const Claims = ({
         onChange={handleInputChange}
         rows={10}
         cols={40}
-        style={{ fontFamily: "monospace" }}
+        className="w-full min-h-[200px] p-2 border border-gray-300 rounded-md font-mono"
       />
     </>
   );

@@ -2,21 +2,18 @@
 
 import React, { ChangeEvent } from "react";
 import { useState } from "react";
-import { Encoded } from "@/components/Encoded";
+import Encoded from "@/components/Encoded";
 import SelectAlg from "@/components/SelectAlg";
 import JwtHeader from "@/components/decoded/JwtHeader";
 import VerifySignature from "@/components/decoded/VerifySignature";
 import Claims from "@/components/decoded/Claims";
 import { DebugHook } from "@/hooks/debug.hooks";
 import JwtCommonHeader from "@/components/common/JwtCommonHeader";
-import { Warning } from "@/components/Warning";
+import { SdJwtContainer } from "@/components/SdJwtContainer";
+import Button from "@/components/common/Button";
 
 export default function Home() {
   const {
-    token,
-    setToken,
-    secret,
-    setSecret,
     base64Checked,
     setBase64Checked,
     discloseFrame,
@@ -25,16 +22,13 @@ export default function Home() {
     setClaims,
     discolsures,
     setDiscolsures,
-    header,
-    setHeader,
     encode,
     decode,
     verify,
   } = DebugHook();
 
-  const [tab, setTab] = useState<"claim" | "discloseFrame" | "discolsures">(
-    "claim"
-  );
+  type TabType = "claim" | "discloseFrame" | "discolsures";
+  const [tab, setTab] = useState<TabType>("claim");
 
   const tabValue = {
     claim: claims,
@@ -53,17 +47,12 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen items-center p-24">
-      <div className="flex justify-center items-center text-4xl m-6 mt-12">
-        Debugger
-      </div>
-      <Warning />
+    <SdJwtContainer>
       <SelectAlg onSelect={handleSelectChange} />
+
       <div className="flex justify-evenly">
         <Encoded />
-
-        {/* decoded */}
-        <div>
+        <div className="decoded">
           <JwtCommonHeader
             title="Decoded"
             subtitle="EDIT THE PAYLOAD AND SECRET"
@@ -71,15 +60,28 @@ export default function Home() {
             subtitleSize="xs"
           />
           <JwtHeader />
-          <br />
           <Claims payload={tabValue[tab]} setPayload={tabHandler[tab]} />
-          <br />
           <VerifySignature
             checked={base64Checked}
             setChecked={setBase64Checked}
           />
         </div>
       </div>
-    </main>
+
+      <Button
+        onClick={async () => {
+          await encode();
+        }}
+      >
+        Encode SD JWT
+      </Button>
+      <Button
+        onClick={async () => {
+          await decode();
+        }}
+      >
+        Decode SD JWT
+      </Button>
+    </SdJwtContainer>
   );
 }
