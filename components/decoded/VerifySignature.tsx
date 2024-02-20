@@ -1,12 +1,17 @@
 "use client";
-import React from "react";
+import { Dispatch, SetStateAction } from "react";
 import { DebugHook } from "@/hooks/debug.hooks";
 
-const VerifySignature = ({ checked, setBase64Checked }: any) => {
+interface VerifySignatureProps {
+  checked: boolean;
+  setChecked: Dispatch<SetStateAction<boolean>>;
+}
+
+const VerifySignature = ({ checked, setChecked }: VerifySignatureProps) => {
   const { secret, setSecret } = DebugHook();
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(`checked = ${e.target.checked}`);
-    setSecret(e.target.value);
+    setChecked(e.target.checked);
   };
 
   return (
@@ -25,18 +30,18 @@ const VerifySignature = ({ checked, setBase64Checked }: any) => {
               className="w-200 text-blue-400"
             />
           </div>
-          {/* <div>
-          <input
-            type="checkbox"
-            checked={checked}
-            value={secret}
-            onChange={onChange}
-            className="text-blue-400"
-          />
-          <label className="text-blue-400 ml-2">
-            {"secret base64 encoded"}
-          </label>
-        </div> */}
+          <div>
+            <input
+              type="checkbox"
+              checked={checked}
+              value={secret}
+              onChange={onChange}
+              className="text-blue-400"
+            />
+            <label className="text-blue-400 ml-2">
+              {"secret base64 encoded"}
+            </label>
+          </div>
         </pre>
       </div>
     </>
