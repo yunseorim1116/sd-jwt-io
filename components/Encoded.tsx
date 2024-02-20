@@ -3,8 +3,12 @@ import { updateURLWithQuery } from "@/utils/stringToUint8Array";
 import { DebugHook } from "@/hooks/debug.hooks";
 import { ChangeEvent } from "react";
 
-const Encoded = () => {
-  const { token, setToken } = DebugHook();
+interface EncodedProps {
+  token: string;
+  setToken: (t: string) => void;
+}
+
+const Encoded = ({ token, setToken }: EncodedProps) => {
   const handleTokenChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value;
     updateURLWithQuery(`token=${newValue}`);

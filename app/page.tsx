@@ -12,6 +12,8 @@ import JwtCommonHeader from "@/components/common/JwtCommonHeader";
 import { SdJwtContainer } from "@/components/SdJwtContainer";
 import Button from "@/components/common/Button";
 
+export type TabType = "claim" | "discloseFrame" | "discolsures";
+
 export default function Home() {
   const {
     base64Checked,
@@ -25,9 +27,12 @@ export default function Home() {
     encode,
     decode,
     verify,
+    token,
+    setToken,
   } = DebugHook();
 
-  type TabType = "claim" | "discloseFrame" | "discolsures";
+  console.log(token);
+
   const [tab, setTab] = useState<TabType>("claim");
 
   const tabValue = {
@@ -51,7 +56,7 @@ export default function Home() {
       <SelectAlg onSelect={handleSelectChange} />
 
       <div className="flex justify-evenly">
-        <Encoded />
+        <Encoded token={token} setToken={setToken} />
         <div className="decoded">
           <JwtCommonHeader
             title="Decoded"
@@ -60,7 +65,12 @@ export default function Home() {
             subtitleSize="xs"
           />
           <JwtHeader />
-          <Claims payload={tabValue[tab]} setPayload={tabHandler[tab]} />
+          <Claims
+            tab={tab}
+            setTab={setTab}
+            payload={tabValue[tab]}
+            setPayload={tabHandler[tab]}
+          />
           <VerifySignature
             checked={base64Checked}
             setChecked={setBase64Checked}

@@ -1,25 +1,37 @@
-"use client";
-
-import JwtCommonHeader from "../common/JwtCommonHeader";
-
-const Claims = ({
-  payload,
-  setPayload,
-}: {
+import { SetStateAction } from "react";
+import { TabType } from "@/app/page";
+interface ClaimsProps {
+  tab: string;
+  setTab: React.Dispatch<React.SetStateAction<TabType>>;
   payload: string;
-  setPayload: any;
-}) => {
+  setPayload: React.Dispatch<SetStateAction<string>>;
+}
+
+const Claims = ({ tab, setTab, payload, setPayload }: ClaimsProps) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPayload(event.target.value);
   };
 
   return (
     <>
-      <div className="flex items-center my-2">
-        <div className="text-base mr-2">PayLoad</div>
-        <div className="text-base mr-2">DiscloseFrames</div>
-        <div className="text-base">Discolsures</div>
+      <div className="flex">
+        <TabButton
+          label="Claims"
+          active={tab === "claim"}
+          onClick={() => setTab("claim")}
+        />
+        <TabButton
+          label="DiscloseFrames"
+          active={tab === "discloseFrame"}
+          onClick={() => setTab("discloseFrame")}
+        />
+        <TabButton
+          label="Discolsures"
+          active={tab === "discolsures"}
+          onClick={() => setTab("discolsures")}
+        />
       </div>
+
       <textarea
         value={payload}
         onChange={handleInputChange}
@@ -28,6 +40,29 @@ const Claims = ({
         className="w-full min-h-[200px] p-2 border border-gray-300 rounded-md font-mono"
       />
     </>
+  );
+};
+
+interface TabButtonProps {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}
+
+const TabButton = ({ label, active, onClick }: TabButtonProps) => {
+  const tabButtonStyle = "px-4 py-2 rounded-md cursor-pointer";
+  const activeTabStyle = "bg-blue-500 text-white";
+  const inactiveTabStyle = "text-gray-500";
+
+  return (
+    <span
+      className={`${tabButtonStyle} ${
+        active ? activeTabStyle : inactiveTabStyle
+      } ml-2`}
+      onClick={onClick}
+    >
+      {label}
+    </span>
   );
 };
 
