@@ -31,8 +31,6 @@ export default function Home() {
     setToken,
   } = DebugHook();
 
-  console.log(token);
-
   const [tab, setTab] = useState<TabType>("claim");
 
   const tabValue = {

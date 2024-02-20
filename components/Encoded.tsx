@@ -1,6 +1,5 @@
 import JwtCommonHeader from "./common/JwtCommonHeader";
 import { updateURLWithQuery } from "@/utils/stringToUint8Array";
-import { DebugHook } from "@/hooks/debug.hooks";
 import { ChangeEvent } from "react";
 
 interface EncodedProps {
@@ -28,7 +27,7 @@ const Encoded = ({ token, setToken }: EncodedProps) => {
         <textarea
           value={token}
           onChange={handleTokenChange}
-          className="w-full min-h-[200px] p-2 border border-gray-300 rounded-md font-mono"
+          className="w-96 min-h-[500px] p-2 border border-gray-300 rounded-md font-mono"
         />
       </div>
     </>

@@ -1,5 +1,3 @@
-// CommonButton.tsx
-
 import React, { ReactNode } from "react";
 
 interface CommonButtonProps {
@@ -10,7 +8,7 @@ interface CommonButtonProps {
 const Button = ({ onClick, children }: CommonButtonProps) => {
   return (
     <button
-      className="bg-blue-500 text-white py-2 px-4 rounded-md transition duration-300 hover:bg-blue-600"
+      className="bg-blue-500 text-white py-2 px-4 rounded-md transition duration-300 hover:bg-blue-600 mr-4"
       onClick={onClick}
     >
       {children}

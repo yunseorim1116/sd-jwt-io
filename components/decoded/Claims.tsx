@@ -1,5 +1,6 @@
 import { SetStateAction } from "react";
 import { TabType } from "@/app/page";
+
 interface ClaimsProps {
   tab: string;
   setTab: React.Dispatch<React.SetStateAction<TabType>>;
@@ -14,7 +15,7 @@ const Claims = ({ tab, setTab, payload, setPayload }: ClaimsProps) => {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex p-4">
         <TabButton
           label="Claims"
           active={tab === "claim"}
@@ -50,7 +51,7 @@ interface TabButtonProps {
 }
 
 const TabButton = ({ label, active, onClick }: TabButtonProps) => {
-  const tabButtonStyle = "px-4 py-2 rounded-md cursor-pointer";
+  const tabButtonStyle = "px-4 py-2 rounded-md cursor-pointer text-sm";
   const activeTabStyle = "bg-blue-500 text-white";
   const inactiveTabStyle = "text-gray-500";
 
@@ -58,7 +59,7 @@ const TabButton = ({ label, active, onClick }: TabButtonProps) => {
     <span
       className={`${tabButtonStyle} ${
         active ? activeTabStyle : inactiveTabStyle
-      } ml-2`}
+      }`}
       onClick={onClick}
     >
       {label}
