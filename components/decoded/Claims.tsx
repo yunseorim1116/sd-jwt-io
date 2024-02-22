@@ -1,5 +1,7 @@
 import { SetStateAction } from "react";
 import { TabType } from "@/app/page";
+import { Controlled as ControlledEditor } from "react-codemirror2";
+import "../Debugger.css";
 
 interface ClaimsProps {
   tab: string;
@@ -15,31 +17,45 @@ const Claims = ({ tab, setTab, payload, setPayload }: ClaimsProps) => {
 
   return (
     <>
-      <div className="flex p-4">
-        <TabButton
-          label="Claims"
-          active={tab === "claim"}
-          onClick={() => setTab("claim")}
-        />
-        <TabButton
-          label="DiscloseFrames"
-          active={tab === "discloseFrame"}
-          onClick={() => setTab("discloseFrame")}
-        />
-        <TabButton
-          label="Discolsures"
-          active={tab === "discolsures"}
-          onClick={() => setTab("discolsures")}
+      <div>
+        <div className="decode-header decode-border-top">
+          <span
+            className={tab === "claim" ? "decode-tab-active" : "decode-tab"}
+            onClick={() => setTab("claim")}
+          >
+            {"Claims"}
+          </span>
+          <span
+            className={
+              tab === "discloseFrame" ? "decode-tab-active" : "decode-tab"
+            }
+            onClick={() => setTab("discloseFrame")}
+          >
+            {"DiscloseFrames"}
+          </span>
+          <span
+            className={
+              tab === "discolsures" ? "decode-tab-active" : "decode-tab"
+            }
+            onClick={() => setTab("discolsures")}
+          >
+            {"Discolsures"}
+          </span>
+        </div>
+      </div>
+      <div className="decode-item">
+        <ControlledEditor
+          value={payload}
+          options={{
+            mode: "javascript",
+            lineWrapping: true,
+          }}
+          onBeforeChange={(editor, data, value) => {
+            setPayload(value);
+          }}
+          className="json-payload"
         />
       </div>
-
-      <textarea
-        value={payload}
-        onChange={handleInputChange}
-        rows={10}
-        cols={40}
-        className="w-full min-h-[200px] p-2 border border-gray-300 rounded-md font-mono"
-      />
     </>
   );
 };
@@ -59,7 +75,7 @@ const TabButton = ({ label, active, onClick }: TabButtonProps) => {
     <span
       className={`${tabButtonStyle} ${
         active ? activeTabStyle : inactiveTabStyle
-      }`}
+      } ml-2`}
       onClick={onClick}
     >
       {label}

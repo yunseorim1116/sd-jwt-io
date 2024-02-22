@@ -1,0 +1,176 @@
+@import "codemirror/lib/codemirror.css";
+@import "codemirror/theme/material.css";
+
+.debugger-wrapper {
+  padding: 60px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.debugger-title {
+  font-size: 2.4rem;
+}
+
+.debugger-warning {
+  background-color: #fff7c9;
+  padding: 1.4rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  line-height: 2;
+}
+
+.code-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.code-item {
+  width: calc(50% - 1rem);
+  position: relative;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.CodeMirror {
+  width: 100%;
+  height: 100%;
+}
+
+.code-title-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.code-title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.code-desc {
+  font-size: 10px;
+  font-weight: normal;
+  color: #777;
+}
+
+.area-wrapper {
+  flex: 1;
+  padding: 1.4rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.decode-area {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  max-height: 536px;
+}
+
+.decode-header {
+  padding: 0.4rem 1rem;
+  border-bottom: 1px solid #ccc;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.decode-desc {
+  font-size: 0.6rem;
+  color: #777;
+}
+
+.decode-item {
+  flex: 1;
+  padding: 0rem 1.4rem;
+
+  overflow-y: auto;
+}
+
+.react-codemirror2 {
+  height: 100%;
+  font-size: 1.4rem;
+}
+
+.decode-border-top {
+  border-top: 1px solid #ccc;
+}
+
+.json-editor {
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 900px) {
+  .debugger-title {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .debugger-title {
+    font-size: 1.6rem;
+  }
+}
+
+.cm-jwt-header {
+  color: rgb(251, 1, 91);
+}
+.cm-jwt-payload {
+  color: rgb(214, 58, 255);
+}
+.cm-jwt-signature {
+  color: rgb(0, 185, 241);
+}
+.cm-jwt-dot {
+  color: black;
+}
+.cm-sdjwt-disclosure {
+  color: purple;
+} /* Style for disclosures */
+.cm-jwt-kbjwt {
+  color: orange;
+} /* Style for additional data */
+
+.json-header .CodeMirror {
+  font-size: 1rem;
+  color: rgb(251, 1, 91);
+}
+
+.json-payload .CodeMirror {
+  font-size: 1rem;
+  color: rgb(214, 58, 255);
+}
+
+.verified-share-wrapper {
+  display: flex;
+  align-self: flex-end;
+  gap: 1rem;
+  padding: 0 20px;
+}
+
+.decode-tab {
+  cursor: pointer;
+}
+
+.decode-tab-active {
+  font-weight: bold;
+  cursor: pointer;
+}

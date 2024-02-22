@@ -11,6 +11,7 @@ import { DebugHook } from "@/hooks/debug.hooks";
 import JwtCommonHeader from "@/components/common/JwtCommonHeader";
 import { SdJwtContainer } from "@/components/SdJwtContainer";
 import Button from "@/components/common/Button";
+import CodeMirror from "codemirror";
 
 export type TabType = "claim" | "discloseFrame" | "discolsures";
 
@@ -54,7 +55,7 @@ export default function Home() {
       <SelectAlg onSelect={handleSelectChange} />
 
       <div className="flex justify-evenly">
-        <Encoded token={token} setToken={setToken} />
+        {/* <Encoded token={token} setToken={setToken} /> */}
         <div className="decoded">
           <JwtCommonHeader
             title="Decoded"
@@ -63,7 +64,7 @@ export default function Home() {
             subtitleSize="xs"
           />
           <JwtHeader />
-          <Claims
+          {/* <Claims
             tab={tab}
             setTab={setTab}
             payload={tabValue[tab]}
@@ -72,7 +73,7 @@ export default function Home() {
           <VerifySignature
             checked={base64Checked}
             setChecked={setBase64Checked}
-          />
+          /> */}
         </div>
       </div>
 
@@ -93,3 +94,34 @@ export default function Home() {
     </SdJwtContainer>
   );
 }
+
+CodeMirror.defineMode("jwt", function () {
+  return {
+    token: function (stream, state) {
+      if (stream.sol()) {
+        state.partParsed = "header"; // Start of line, assume header
+      }
+
+      if (stream.eat(".") || stream.eat("~")) {
+        // Consume and style the dot
+        if (state.partParsed === "header") {
+          state.partParsed = "payload";
+        } else if (state.partParsed === "payload") {
+          state.partParsed = "signature";
+        } else if (state.partParsed === "signature") {
+          state.partParsed = "after-signature"; // After the signature, no styling
+        }
+        return "jwt-dot";
+      }
+
+      stream.next(); // Consume the next character
+      if (state.partParsed === "after-signature") {
+        return "sdjwt-disclosure"; // No styling after the signature
+      }
+      return "jwt-" + state.partParsed; // Style based on the current part
+    },
+    startState: function () {
+      return { partParsed: null };
+    },
+  };
+});

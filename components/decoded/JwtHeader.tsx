@@ -1,28 +1,46 @@
 "use client";
 
 import { DebugHook } from "@/hooks/debug.hooks";
+import { Controlled as ControlledEditor } from "react-codemirror2";
+import "../Debugger.css";
+import { useState, useEffect } from "react";
+
+import dynamic from "next/dynamic";
 
 const JwtHeader = () => {
   const { header, setHeader } = DebugHook();
-  const handleInputChange = (event: any) => {
-    setHeader(event.target.value);
-  };
+  const [CodeMirror, setCodeMirror] = useState<typeof ControlledEditor | null>(
+    null
+  );
+  useEffect(() => {
+    const importCodeMirror = async () => {
+      // 동적 임포트
+      const { Controlled } = await import("react-codemirror2");
+
+      // 코드미러 모듈을 상태에 설정
+      setCodeMirror(Controlled);
+    };
+
+    // 코드미러 모듈 가져오기
+    importCodeMirror();
+  }, []);
+
+  if (!CodeMirror) {
+    return <div>Loading CodeMirror...</div>;
+  }
 
   return (
-    <>
-      <div className="flex items-center my-2">
-        <div className="text-base">Header</div>
-        <p className="text-gray-500 text-xs ml-2">ALGORITHM & TOKEN TYPE</p>
-      </div>
-
-      <textarea
-        value={header}
-        onChange={handleInputChange}
-        rows={10}
-        cols={40}
-        className="w-full h-24 p-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-red-500 font-mono"
-      />
-    </>
+    <CodeMirror
+      value={header}
+      options={{
+        mode: "javascript",
+        lineWrapping: true,
+      }}
+      onBeforeChange={(editor, data, value) => {
+        setHeader(value);
+      }}
+      className="json-header"
+    />
   );
 };
 
