@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className="fixed top-0 flex h-24 w-full bg-black text-base font-medium shadow items-center justify-between text-white">
+    <header className="z-50 fixed top-0 flex h-24 w-full bg-black text-base font-medium shadow items-center justify-between text-white">
       <h1 className="text-4xl ml-8">
         <Link href="/">SD JWT</Link>
       </h1>
